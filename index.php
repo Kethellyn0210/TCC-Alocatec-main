@@ -11,17 +11,17 @@
  
 <body>
     <div class="container">
-        <form class="login-form">
+        <form class="login-form" method="post" action="validacao_adm.php">
             <div class="form-header">
                 <img src="https://placehold.co/180x180">
             </div>
  
             <div class="form-content">
                 <label>Email</label>
-                <input class="form-control" placeholder="E-mail" />
+                <input class="form-control" placeholder="E-mail" name="email" />
              
                 <label>Senha</label>
-                <input class="form-control" placeholder="Senha" />
+                <input class="form-control" placeholder="Senha" name="senha" />
                
                 <button class="btn">Entrar</button>        
             </div>
