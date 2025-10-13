@@ -15,7 +15,7 @@
       <nav>
         <ul>
           <li>Início</li>
-          <li>Solicitações</li>
+          <li><a href="../solicitacao/solicitacao.php">Solicitações</a></li>
           <li>Instalações</li>
           <li>Notificações</li>
         </ul>
