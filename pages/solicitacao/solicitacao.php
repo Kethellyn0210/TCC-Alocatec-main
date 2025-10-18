@@ -8,29 +8,30 @@
 </head>
 <body>
 
-  <aside>
-    <div>
-      <div class="logo">ALOCATEC</div>
-      <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 10px 20px;">
-      <nav>
-        <ul>
-          <li>Início</li>
-          <li>Solicitações</li>
-          <li>Instalações</li>
-          <li>Notificações</li>
-        </ul>
-      </nav>
+  <aside class="sidebar">
+    <div class="logo">
+    <div class="icone-logo">
+      <img src="./img/alocatec_logo.jpeg">
     </div>
-
-    <div>
-      <div class="user">
-        <img src="https://via.placeholder.com/32" alt="user">
-        <div>
-          <div><strong>André Martins</strong></div>
-          <div>Administrador</div>
-        </div>
+      <h2>ALOCATEC</h2>
+    <br>
+    <hr></hr>
+    </div>
+    <nav>
+      <ul>
+        <li>INICIO</li>
+        <li><a href="../solicitacao/solicitacao.php">SOLICITAÇÕES</a></li>
+        <li><a href="./fotos.php">INSTALAÇÕES</a></li>
+        <li>NOTIFICAÇÕES</li>
+      </ul>
+    </nav>
+    <div class="user">
+    <div class="avatar"></div>
+      <div class="user-info">
+        <p class="nome">André Martins</p>
+        <p class="cargo">Administrador</p>
       </div>
-      <div class="logout">Sair</div>
+      <a href="#" class="logout">SAIR</a>
     </div>
   </aside>
 

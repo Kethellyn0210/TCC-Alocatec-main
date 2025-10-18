@@ -2,78 +2,90 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: "Nunito";
 }
 
 body {
-  display: flex;
-  height: 100vh;
   background: #f5f5f5;
 }
 
-/* MENU LATERAL */
-aside {
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
   width: 250px;
-  background: #0e2433;
+  background: #0e2749;
   color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 20px 0;
+  padding: 30px 20px;
 }
 
 .logo {
   text-align: center;
+  margin-bottom: 10px;
+}
+
+.logo img {
+  width: 120px;
+  height: auto;
+}
+
+.icone-logo {
+  font-size: 40px;
   font-weight: bold;
-  letter-spacing: 1px;
-  margin-bottom: 20px;
 }
 
 nav ul {
   list-style: none;
-  padding: 0;
 }
 
-nav li {
-  padding: 12px 20px;
+nav ul li {
+  padding: 15px 10px;
   cursor: pointer;
-  font-size: 14px;
+  opacity: 0.8;
+  transition: 0.3s;
 }
 
-nav li:hover {
-  background: #16384e;
+nav ul li.active,
+nav ul li:hover {
+  background: #163764;
+  border-radius: 8px;
+  opacity: 1;
 }
 
 .user {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 15px 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  font-size: 13px;
 }
 
-.user img {
-  width: 32px;
-  height: 32px;
+.avatar {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #7f7ff5, #b388eb);
   border-radius: 50%;
-  background: #ccc;
 }
 
-.content {
-  flex: 1;
-  background: #fff;
-  padding: 20px;
+.user-info p {
+  margin: 0;
+}
+
+.nome {
+  font-weight: bold;
+}
+
+.cargo {
+  font-size: 0.85rem;
+  opacity: 0.8;
 }
 
 .logout {
-  text-align: right;
-  padding: 0 20px 10px;
-  font-size: 12px;
-  color: #bbb;
-  cursor: pointer;
-}
-
-.logout:hover {
+  margin-left: auto;
   color: #fff;
+  font-size: 0.9rem;
+  text-decoration: none;
 }

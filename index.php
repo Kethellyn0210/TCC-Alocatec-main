@@ -1,31 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
- 
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
- 
-    <title>Alocatec - Login</title>
+    <title>ALOCATEC - Login</title>
+    <link rel="stylesheet" href="./index.css">
 </head>
- 
 <body>
-    <div class="container">
-        <form class="login-form" method="post" action="validacao_adm.php">
-            <div class="form-header">
-                <img src="https://placehold.co/180x180">
+    <div class="fundo">
+        <img src="./img/foto_login.jpeg" alt="">
+        <div class="caixa-login">
+            <div class="logo">
+                <img src="./img/alocatec_logo.jpeg" alt="Logo" class="icone-logo">
+                <h2 class="nome-logo">ALOCATEC</h2>
             </div>
- 
-            <div class="form-content">
-                <label>Email</label>
-                <input class="form-control" placeholder="E-mail" name="email" />
+
+            <form class="formulario">
+                <label for="nome" class="rotulo">Nome</label>
+                <input type="text" id="nome" class="campo-texto" placeholder="Digite seu nome">
+
+                <label for="senha" class="rotulo">Senha</label>
+                <input type="password" id="senha" class="campo-texto" placeholder="Digite sua senha">
+
+                <a href="#" class="link-cadastro">Cadastre-se</a>
              
-                <label>Senha</label>
-                <input class="form-control" placeholder="Senha" name="senha" />
+                <button type="submit" class="botao-entrar"> <a href="./pages/home/home.php">Entrar</a></button>
                
-                <button class="btn">Entrar</button>        
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </body>
 </html>

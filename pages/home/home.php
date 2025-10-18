@@ -3,40 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ALOCATEC</title>
-  <link rel="stylesheet" href="home.css">
+  <title>ALOCATEC - Solicitações</title>
+  <link rel="stylesheet" href="./home.css">
 </head>
 <body>
+  <div class="container">
 
-  <aside>
-    <div>
-      <div class="logo">ALOCATEC</div>
-      <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 10px 20px;">
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="icone-logo">
+            <img src="./img/alocatec_logo.jpeg">
+        </div>
+        <h2>ALOCATEC</h2>
+        <br>
+        <hr></hr>
+      </div>
       <nav>
         <ul>
-          <li>Início</li>
-          <li><a href="../solicitacao/solicitacao.php">Solicitações</a></li>
-          <li>Instalações</li>
-          <li>Notificações</li>
+          <li>INICIO</li>
+          <li><a href="../solicitacao/solicitacao.php">SOLICITAÇÕES</a></li>
+          <li><a href="./fotos.php">INSTALAÇÕES</a></li>
+          <li>NOTIFICAÇÕES</li>
         </ul>
       </nav>
-    </div>
-
-    <div>
       <div class="user">
-        <img src="https://via.placeholder.com/32" alt="user">
-        <div>
-          <div><strong>André Martins</strong></div>
-          <div>Administrador</div>
+        <div class="avatar"></div>
+        <div class="user-info">
+          <p class="nome">André Martins</p>
+          <p class="cargo">Administrador</p>
         </div>
+        <a href="#" class="logout">SAIR</a>
       </div>
-      <div class="logout">Sair</div>
-    </div>
-  </aside>
-
-  <div class="content">
-
+    </aside>
   </div>
-
 </body>
 </html>
