@@ -96,35 +96,57 @@
   </div>
 </div>
 
+<?php 
+require_once '../../database/conexao_bd_mysql.php';
 
-    <div class="solicitacao">
-     <div class="solicitacao-body">
-        <div class="topo-solicitacao">
-        <div class="nome-espaco">
-            <h2>Nome do espaço</h2>
-        </div>
-        <div class="status-solicitacao">
-            <h2>Pendente</h2>
-        </div>
-        </div>
-        
-        <div class="detalhes-solicitacao">
-            <div>
-                <img src="./img/perfil.png">
-                <h2>Nome da pessoa</h2>
-            </div>
-            <div>
-                <img src="./img/calendario.png">
-                <h2>Data da Solicitação</h2>
-            </div>
-            <div>
-                <img src="./img/relogio.png">
-               <h2>Hora da solicitação</h2>
-            </div>
-        </div> 
-     </div>
-    </div>
+$sql = "
+SELECT 
+    R.id_reserva,
+    R.data,
+    R.horario,
+    R.status,
+    U.nome AS usuario,
+    E.tipo AS espaco
+FROM reserva R
+INNER JOIN usuario U ON R.id_usuario = U.id_usuario
+INNER JOIN espaco E ON R.id_espaco = E.id_espaco
+";
 
+$reservas = mysqli_query($conexao_servidor_bd, $sql);
+
+if ($reservas && mysqli_num_rows($reservas) > 0) {
+    while ($value = mysqli_fetch_assoc($reservas)) {
+        echo "
+        <div class='solicitacao-card'>
+          <div class='topo-solicitacao'>
+            <div class='nome-espaco'>
+              <h2>" . htmlspecialchars($value['espaco']) . "</h2>
+            </div>
+            <div class='status-solicitacao'>
+              <h2>" . htmlspecialchars($value['status']) . "</h2>
+            </div>
+          </div>
+          <div class='detalhes-solicitacao'>
+            <div class='detalhe'>
+              <h3>Data:</h3>
+              <p>" . htmlspecialchars($value['data']) . "</p>
+            </div>
+            <div class='detalhe'>
+              <h3>Horário:</h3>
+              <p>" . htmlspecialchars($value['horario']) . "</p>
+            </div>
+            <div class='detalhe'>
+              <h3>Usuario:</h3>
+              <p>" . htmlspecialchars($value['usuario']) . "</p>
+            </div>
+          </div>
+        </div>
+        ";
+    }
+} else {
+    echo "<p>Nenhuma reserva encontrada.</p>";
+}
+?>
   </div>
 
 </body>
