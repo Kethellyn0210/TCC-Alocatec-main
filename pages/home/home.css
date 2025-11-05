@@ -57,6 +57,19 @@ nav ul li:hover {
   opacity: 1;
 }
 
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:visited {
+  color: white;
+}
+
+a:hover {
+  color: #434ff0;
+}
+
 .user {
   display: flex;
   align-items: center;

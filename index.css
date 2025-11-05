@@ -83,3 +83,8 @@
 .botao-entrar:hover {
   background-color: #8eb7d4;
 }
+
+a {
+  text-decoration: none;
+  color: white;
+}

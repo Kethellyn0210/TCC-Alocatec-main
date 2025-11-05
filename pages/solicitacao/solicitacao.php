@@ -28,8 +28,15 @@
     <div class="user">
     <div class="avatar"></div>
       <div class="user-info">
-        <p class="nome">André Martins</p>
-        <p class="cargo">Administrador</p>
+        <?php
+        require_once '../../database/conexao_bd_mysql.php';
+        $sql = "SELECT nome, email FROM administrador LIMIT 1";
+        $usuarios = mysqli_query($conexao_servidor_bd, $sql);
+                foreach ($usuarios as $key => $value) {
+            echo "<p class='nome'>" . $value['nome'] . "</p>";
+            echo "<p class='email'>" . $value['email'] . "</p>";
+        }     
+      ?>
       </div>
       <a href="#" class="logout">SAIR</a>
     </div>
@@ -110,6 +117,7 @@ SELECT
 FROM reserva R
 INNER JOIN usuario U ON R.id_usuario = U.id_usuario
 INNER JOIN espaco E ON R.id_espaco = E.id_espaco
+LIMIT 3
 ";
 
 $reservas = mysqli_query($conexao_servidor_bd, $sql);
@@ -122,7 +130,7 @@ if ($reservas && mysqli_num_rows($reservas) > 0) {
             <div class='nome-espaco'>
               <h2>" . htmlspecialchars($value['espaco']) . "</h2>
             </div>
-            <div class='status-solicitacao'>
+            <div class='status-solicitacao " . htmlspecialchars($value['status']) . "'>
               <h2>" . htmlspecialchars($value['status']) . "</h2>
             </div>
           </div>
