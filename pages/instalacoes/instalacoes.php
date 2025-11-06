@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ALOCATEC - Solicitações</title>
-  <link rel="stylesheet" href="solicitacao.css">
-   <link rel="icon" href="img/logo.png">
+  <title>ALOCATEC - Instalações</title>
+  <link rel="stylesheet" href="instalacoes.css">
+     <link rel="icon" href="img/logo.png">
   <link rel="shortcut icon" href="img/logo.png">
 </head>
 <body>
@@ -23,7 +23,7 @@
       <ul>
         <li><a href="../home/home.php">INICIO</a></li>
         <li><a href="../solicitacao/solicitacao.php">SOLICITAÇÕES</a></li>
-        <li><a href="../instalacoes/instalacoes.php">INSTALAÇÕES</a></li>
+        <li><a href="./fotos.php">INSTALAÇÕES</a></li>
         <li>NOTIFICAÇÕES</li>
       </ul>
     </nav>
