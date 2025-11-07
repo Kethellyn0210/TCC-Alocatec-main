@@ -1,3 +1,14 @@
+<?php
+require_once '../../login/login.php';
+
+if (!Store::isLogged()) {
+    header("Location: ../../index.php");
+    exit();
+}
+
+$usuario = Store::get('usuario');
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -31,10 +42,10 @@
       <div class="user">
         <div class="avatar"></div>
         <div class="user-info">
-          <p class="nome">André Martins</p>
-          <p class="cargo">Administrador</p>
+          <p class="nome"><?php echo htmlspecialchars($usuario['nome']); ?></p>
+          <p class="cargo"><?php echo htmlspecialchars($usuario['email']); ?></p>
         </div>
-        <a href="#" class="logout">SAIR</a>
+        <a href="../../login/logout.php" class="logout">SAIR</a>
       </div>
     </aside>
   </div>

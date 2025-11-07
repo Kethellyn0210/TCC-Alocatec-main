@@ -1,3 +1,13 @@
+<?php
+require_once '../../login/login.php';
+
+if (!Store::isLogged()) {
+    header("Location: ../../index.php");
+    exit();
+}
+
+$usuario = Store::get('usuario');
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -29,32 +39,48 @@
     </nav>
     <div class="user">
     <div class="avatar"></div>
-      <div class="user-info">
-        <?php
-        require_once '../../database/conexao_bd_mysql.php';
-        $sql = "SELECT nome, email FROM administrador LIMIT 1";
-        $usuarios = mysqli_query($conexao_servidor_bd, $sql);
-                foreach ($usuarios as $key => $value) {
-            echo "<p class='nome'>" . $value['nome'] . "</p>";
-            echo "<p class='email'>" . $value['email'] . "</p>";
-        }     
-      ?>
-      </div>
-      <a href="#" class="logout">SAIR</a>
+ <div class="user-info">
+          <p class="nome"><?php echo htmlspecialchars($usuario['nome']); ?></p>
+          <p class="cargo"><?php echo htmlspecialchars($usuario['email']); ?></p>
+        </div>
+      <a href="../../login/logout.php" class="logout">SAIR</a>
     </div>
   </aside>
 
   <div class="content">
     <div class="page">
-        <h1>Solicitações</h1>
-        <p>Lista de todas as solicitações de reserva.</p>
+      <div class="titulo-pagina">
+        <h1>Instalações</h1>
+        <p>Lista de instalações.</p>
     </div>
+  <div class="acoes-topo">
+  <button class="botao-acao atualizar" onclick="location.reload()">
+    <img src="./img/atualizar.png" alt="Atualizar">
+  </button>
+  <button class="botao-acao adicionar" onclick="window.location.href='../questionario_instalacao/form1/adicionar_descricao.php'">
+    <img src="./img/adicao.png" alt="Adicionar">
+    <span>ADICIONAR</span>
+  </button>
+</div>
+</div>
+
   <div class="nao-sei">
    <div class="status">
-    <h2>Pendentes</h2>
+    <h2>Registradas</h2>
      <?php 
 		require_once '../../database/conexao_bd_mysql.php'; 
-        $sql = "SELECT COUNT(*) AS status FROM reserva WHERE status = 'Pendente'";
+        $sql = "SELECT COUNT(*) AS id_estabelecimento FROM estabelecimento";
+        $usuarios = mysqli_query($conexao_servidor_bd, $sql);
+        foreach ($usuarios as $key => $value) {
+            echo "<div class='resultado'>" . $value['id_estabelecimento'] . "</div>";
+        }
+        ?>
+   </div>
+   <div class="status">
+    <h2>Ativas</h2>
+    <?php 
+		require_once '../../database/conexao_bd_mysql.php'; 
+        $sql = "SELECT COUNT(*) AS status FROM estabelecimento WHERE status = 'Ativo'";
         $usuarios = mysqli_query($conexao_servidor_bd, $sql);
         foreach ($usuarios as $key => $value) {
             echo "<div class='resultado'>" . $value['status'] . "</div>";
@@ -62,21 +88,10 @@
         ?>
    </div>
    <div class="status">
-    <h2>Autorizados</h2>
+    <h2>Inativas</h2>
     <?php 
 		require_once '../../database/conexao_bd_mysql.php'; 
-        $sql = "SELECT COUNT(*) AS status FROM reserva WHERE status = 'concluída'";
-        $usuarios = mysqli_query($conexao_servidor_bd, $sql);
-        foreach ($usuarios as $key => $value) {
-            echo "<div class='resultado'>" . $value['status'] . "</div>";
-        }
-        ?>
-   </div>
-   <div class="status">
-    <h2>Recusados</h2>
-    <?php 
-		require_once '../../database/conexao_bd_mysql.php'; 
-        $sql = "SELECT COUNT(*) AS status FROM reserva WHERE status = 'cancelada'";
+        $sql = "SELECT COUNT(*) AS status FROM estabelecimento WHERE status = 'Inativo'";
         $usuarios = mysqli_query($conexao_servidor_bd, $sql);
         foreach ($usuarios as $key => $value) {
             echo "<div class='resultado'>" . $value['status'] . "</div>";
@@ -98,9 +113,8 @@
   <div class="chip">
     <select>
       <option>Status</option>
-      <option>Pendente</option>
-      <option>Autorizados</option>
-      <option>Recusados</option>
+      <option>Ativo</option>
+      <option>Inativo</option>
     </select>
   </div>
 </div>
@@ -109,16 +123,8 @@
 require_once '../../database/conexao_bd_mysql.php';
 
 $sql = "
-SELECT 
-    R.id_reserva,
-    R.data,
-    R.horario,
-    R.status,
-    U.nome AS usuario,
-    E.tipo AS espaco
-FROM reserva R
-INNER JOIN usuario U ON R.id_usuario = U.id_usuario
-INNER JOIN espaco E ON R.id_espaco = E.id_espaco
+SELECT nome, endereco, status, inicio, termino, disponibilidade
+FROM estabelecimento 
 LIMIT 3
 ";
 
@@ -130,7 +136,7 @@ if ($reservas && mysqli_num_rows($reservas) > 0) {
         <div class='solicitacao-card'>
           <div class='topo-solicitacao'>
             <div class='nome-espaco'>
-              <h2>" . htmlspecialchars($value['espaco']) . "</h2>
+              <h2>" . htmlspecialchars($value['nome']) . "</h2>
             </div>
             <div class='status-solicitacao " . htmlspecialchars($value['status']) . "'>
               <h2>" . htmlspecialchars($value['status']) . "</h2>
@@ -138,23 +144,29 @@ if ($reservas && mysqli_num_rows($reservas) > 0) {
           </div>
           <div class='detalhes-solicitacao'>
             <div class='detalhe'>
-              <h3>Data:</h3>
-              <p>" . htmlspecialchars($value['data']) . "</p>
+              <h3>Endereço:</h3>
+              <p>" . htmlspecialchars($value['endereco']) . "</p>
             </div>
-            <div class='detalhe'>
-              <h3>Horário:</h3>
-              <p>" . htmlspecialchars($value['horario']) . "</p>
+               <div class='detalhe'>
+              <h3>Início:</h3>
+              <p>" . htmlspecialchars($value['inicio']) . "</p>
             </div>
-            <div class='detalhe'>
-              <h3>Usuario:</h3>
-              <p>" . htmlspecialchars($value['usuario']) . "</p>
+               <div class='detalhe'>
+              <h3>Término:</h3>
+              <p>" . htmlspecialchars($value['termino']) . "</p>
+            </div>
+               <div class='detalhe'>
+              <h3>Disponibilidade:</h3>
+              <p>" . htmlspecialchars($value['disponibilidade']) . "</p>
             </div>
           </div>
         </div>
         ";
     }
 } else {
-    echo "<p>Nenhuma reserva encontrada.</p>";
+    echo "<div class='encontrada'>
+    <h2>Nenhuma Instalação encontrada.</h2>
+    </div>";
 }
 ?>
   </div>

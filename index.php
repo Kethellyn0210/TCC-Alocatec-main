@@ -1,10 +1,9 @@
 <?php
-session_start();
 require_once './database/conexao_bd_mysql.php';
+require_once './login/login.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-  if (isset($_POST['email']) && isset($_POST['senha'])) {
+  if (!empty($_POST['email']) && !empty($_POST['senha'])) {
     $email = $_POST['email'];
     $senha = md5($_POST['senha']);
 
@@ -12,7 +11,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = mysqli_query($conexao_servidor_bd, $sql);
 
     if ($result && mysqli_num_rows($result) > 0) {
-      $_SESSION['usuario'] = $email;
+      $dados = mysqli_fetch_assoc($result);
+
+      Store::set('usuario', [
+        'id' => $dados['id_administrador'],
+        'nome' => $dados['nome'],
+        'email' => $dados['email']
+      ]);
+
       header("Location: ./pages/home/home.php");
       exit();
     } else {

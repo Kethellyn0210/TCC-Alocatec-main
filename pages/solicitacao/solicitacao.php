@@ -1,3 +1,13 @@
+<?php
+require_once '../../login/login.php';
+
+if (!Store::isLogged()) {
+    header("Location: ../../index.php");
+    exit();
+}
+
+$usuario = Store::get('usuario');
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -29,18 +39,12 @@
     </nav>
     <div class="user">
     <div class="avatar"></div>
-      <div class="user-info">
-        <?php
-        require_once '../../database/conexao_bd_mysql.php';
-        $sql = "SELECT nome, email FROM administrador LIMIT 1";
-        $usuarios = mysqli_query($conexao_servidor_bd, $sql);
-                foreach ($usuarios as $key => $value) {
-            echo "<p class='nome'>" . $value['nome'] . "</p>";
-            echo "<p class='email'>" . $value['email'] . "</p>";
-        }     
-      ?>
+  <div class="user-info">
+          <p class="nome"><?php echo htmlspecialchars($usuario['nome']); ?></p>
+          <p class="cargo"><?php echo htmlspecialchars($usuario['email']); ?></p>
+        </div>
       </div>
-      <a href="#" class="logout">SAIR</a>
+      <a href="../../login/logout.php" class="logout">SAIR</a>
     </div>
   </aside>
 
