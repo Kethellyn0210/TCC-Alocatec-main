@@ -1,12 +1,27 @@
 <?php
-require_once '../../../login/login.php';
+// adicionar_localizacao.php
+session_start();
+require_once '../../../login/login.php'; // ajuste caminho
 
-if (!Store::isLogged()) {
-    header("Location: ../../index.php");
+if (!isset($_SESSION['usuario'])) {
+    header("Location: ../../../index.php");
     exit();
 }
+$usuario = $_SESSION['usuario'];
 
-$usuario = Store::get('usuario');
+// Grava os dados enviados pelo form1 em $_SESSION
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $_SESSION['nome_espaco'] = isset($_POST['nome_espaco']) ? trim($_POST['nome_espaco']) : '';
+    $_SESSION['tipo_espaco'] = isset($_POST['tipo_espaco']) ? trim($_POST['tipo_espaco']) : '';
+    $_SESSION['cobertura']   = isset($_POST['cobertura']) ? trim($_POST['cobertura']) : '';
+    $_SESSION['capacidade']  = isset($_POST['capacidade']) ? intval($_POST['capacidade']) : 0;
+    $_SESSION['largura']     = isset($_POST['largura']) ? trim($_POST['largura']) : '';
+    $_SESSION['comprimento'] = isset($_POST['comprimento']) ? trim($_POST['comprimento']) : '';
+} else {
+    // sem POST, redireciona para o passo 1
+    header("Location: form1_adicionar_descricao.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -53,49 +68,41 @@ $usuario = Store::get('usuario');
 
       <div class="form-card">
         <h2>Localização</h2>
-
-        <form>
+        
+        <form method="post" action="../form3/adicionar_agendamento.php">
           <div class="form-row">
             <div class="campo maior">
               <label>Endereço</label>
-              <input type="text" placeholder="">
-            </div>
+              <input type="text" name="endereco" required> </div>
             <div class="campo pequeno">
               <label>Nº</label>
-              <input type="text">
-            </div>
+              <input type="text" name="numero" required> </div>
           </div>
 
           <div class="form-row">
             <div>
               <label>Bairro</label>
-              <input type="text">
-            </div>
+              <input type="text" name="bairro" required> </div>
             <div>
               <label>CEP</label>
-              <input type="text">
-            </div>
+              <input type="text" name="cep" required> </div>
             <div>
               <label>Cidade</label>
-              <input type="text">
-            </div>
+              <input type="text" name="cidade" required> </div>
           </div>
 
           <div class="form-row">
             <div>
               <label>Complemento</label>
-              <input type="text">
-            </div>
+              <input type="text" name="complemento"> </div>
             <div>
               <label>UF</label>
-              <input type="text" maxlength="2">
-            </div>
+              <input type="text" name="uf" maxlength="2" required> </div>
           </div>
 
     <div class="button-container">
         <button class="botao-acao adicionar" onclick="window.location.href='../questionario_instalacao/form1/adicionar_descricao.php'">
-        <button type="button" class="next-btn"
-            onclick="window.location.href='../form3/adicionar_agendamento.php'"
+        <button type="submit" class="next-btn"
             >Próximo</button>
           </div>
         </form>

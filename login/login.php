@@ -1,5 +1,6 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 
 class Store {
     // Define ou atualiza um valor no estado global (sessão)
@@ -26,4 +27,5 @@ class Store {
     public static function logout() {
         session_destroy();
     }
+}
 }

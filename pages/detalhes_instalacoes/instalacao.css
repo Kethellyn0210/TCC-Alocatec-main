@@ -6,7 +6,9 @@
 }
 
 body {
-  background: #f5f5f5;
+  display: flex;
+  height: 100vh;
+  background: #ffffff;
 }
 
 .container {
@@ -17,7 +19,7 @@ body {
 .sidebar {
   width: 250px;
   background: #0d2137;
-  color: #fff;
+  color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -56,7 +58,6 @@ nav ul li:hover {
   border-radius: 8px;
   opacity: 1;
 }
-
 a {
   text-decoration: none;
   color: white;
@@ -103,105 +104,131 @@ a:hover {
   text-decoration: none;
 }
 
-.main {
-  flex: 1;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.page-title {
-  width: 90%;
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.form-card {
+.content {
   background-color: white;
   width: 900px;
   padding: 30px 40px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   margin-top: 25px;
+  align-items: center;
+  margin: 20px auto 10px auto;
 }
 
-.form-card h2 {
-  font-size: 18px;
-  margin-bottom: 20px;
+.header-form {
+  display: flex;
+  width: 90%;
+  max-width: 900px;
+  margin-block: 20px;
+  justify-content: space-between;
 }
 
-form {
+.header-form h2 {
+  font-size: 22px;
+  color: #222;
+  font-weight: 600;
+}
+
+.status-ativo {
+  background: #27ae60;
+  color: #fff;
+  padding: 5px 14px;
+  border-radius: 25px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ====== FORMULÁRIO ====== */
+.form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-}
-
-label {
-  font-size: 13px;
-  margin-bottom: 5px;
-  color: #333;
-}
-
-input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-  background-color: #f4f4f4;
+  gap: 20px;
 }
 
 .form-row {
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
-.form-row select {
-  width: 100%;
-}
-
-select {
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  background-color: #f4f4f4;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-  font-size: 14px;
-}
-
-.button-container {
+.form-group {
+  flex: 1;
   display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin-top: 20px;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.button-container button {
-  border: none;
-  color: white;
-  padding: 10px 30px;
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.2);
+.form-group.full {
+  width: 100%;
+}
+
+.form-group.large {
+  flex: 2;
+}
+
+.form-group.small {
+  flex: 0.5;
+}
+
+/* ====== LABELS E CAMPOS ====== */
+label {
   font-size: 14px;
-  transition: 0.3s;
+  font-weight: 600;
+  color: #555;
 }
 
-.salvar {
-  background-color: #44d25e;
+p {
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: #333;
+  margin: 0;
 }
 
-.salvar:hover {
-  background-color: #3ab052;
+/* ====== BOTÕES ====== */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 30px;
 }
 
-.cancelar {
-  background-color: #d83333;
+.btn {
+  padding: 10px 22px;
+  border: none;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.cancelar:hover {
-  background-color: #b92c2c;
+/* ====== CORES DOS BOTÕES ====== */
+.btn-apagar {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.btn-apagar:hover {
+  background-color: #c0392b;
+}
+
+.btn-editar {
+  background-color: #2980b9;
+  color: #fff;
+}
+
+.btn-editar:hover {
+  background-color: #1c598a;
+}
+
+.btn-voltar {
+  background-color: #95a5a6;
+  color: #fff;
+}
+
+.btn-voltar:hover {
+  background-color: #7f8c8d;
 }

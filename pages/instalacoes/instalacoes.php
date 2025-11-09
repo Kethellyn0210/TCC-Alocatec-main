@@ -122,18 +122,30 @@ $usuario = Store::get('usuario');
 <?php 
 require_once '../../database/conexao_bd_mysql.php';
 
-$sql = "
-SELECT nome, endereco, status, inicio, termino, disponibilidade
-FROM estabelecimento 
-LIMIT 3
-";
+$limite = 3;
 
+$onde_estou = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+
+$linha_mysql = ($onde_estou - 1) * $limite;
+
+$total_query = "SELECT COUNT(*) AS total FROM estabelecimento";
+$total_result = mysqli_query($conexao_servidor_bd, $total_query);
+$total_row = mysqli_fetch_assoc($total_result);
+$total = $total_row['total'];
+$total_pag = ceil($total / $limite);
+
+$sql = "
+SELECT id_estabelecimento, nome, endereco, status, inicio, termino, disponibilidade
+FROM estabelecimento
+LIMIT $linha_mysql, $limite
+";
 $reservas = mysqli_query($conexao_servidor_bd, $sql);
 
 if ($reservas && mysqli_num_rows($reservas) > 0) {
     while ($value = mysqli_fetch_assoc($reservas)) {
+      $id = htmlspecialchars($value['id_estabelecimento']);
         echo "
-        <div class='solicitacao-card'>
+        <div class='solicitacao-card' data-id='$id' onclick=\"window.location.href='../detalhes_instalacoes/instalacao.php?id_estabelecimento=$id'\">
           <div class='topo-solicitacao'>
             <div class='nome-espaco'>
               <h2>" . htmlspecialchars($value['nome']) . "</h2>
@@ -147,15 +159,15 @@ if ($reservas && mysqli_num_rows($reservas) > 0) {
               <h3>Endereço:</h3>
               <p>" . htmlspecialchars($value['endereco']) . "</p>
             </div>
-               <div class='detalhe'>
+            <div class='detalhe'>
               <h3>Início:</h3>
               <p>" . htmlspecialchars($value['inicio']) . "</p>
             </div>
-               <div class='detalhe'>
+            <div class='detalhe'>
               <h3>Término:</h3>
               <p>" . htmlspecialchars($value['termino']) . "</p>
             </div>
-               <div class='detalhe'>
+            <div class='detalhe'>
               <h3>Disponibilidade:</h3>
               <p>" . htmlspecialchars($value['disponibilidade']) . "</p>
             </div>
@@ -164,12 +176,18 @@ if ($reservas && mysqli_num_rows($reservas) > 0) {
         ";
     }
 } else {
-    echo "<div class='encontrada'>
-    <h2>Nenhuma Instalação encontrada.</h2>
-    </div>";
+    echo "<div class='erro'>
+        <h2>Nenhuma solicitação encontrada</h2>
+      </div>";
 }
 ?>
-  </div>
+
+<div class="pagination-dots">
+    <?php for ($i = 1; $i <= $total_pag; $i++): ?>
+        <?php $class = ($i == $onde_estou) ? 'active' : ''; ?>
+        <a href="?page=<?php echo $i; ?>" class="dot <?php echo $class; ?>"></a>
+    <?php endfor; ?>
+</div>
 
 </body>
 </html>

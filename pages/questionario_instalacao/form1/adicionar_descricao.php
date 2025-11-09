@@ -54,35 +54,35 @@ $usuario = Store::get('usuario');
       <section class="form-card">
         <h2>Descrição do Espaço</h2>
 
-        <form>
+        <form method="post" action="../form2/adicionar_localizacao.php">
           <label>Nome da Espaço</label>
-          <input type="text" />
-
-          <div class="form-row">
+          <input type="text" name="nome_espaco" required /> <div class="form-row">
             <div>
               <label>Tipo de Espaço/Esporte</label>
-              <input type="text" />
-            </div>
+              <input type="text" name="tipo_espaco" required /> </div>
+          <div class="form-row">
             <div>
               <label>Cobertura</label>
-              <input type="text" />
+                <div>
+                  <select name="cobertura">
+                    <option>Sim</option>
+                    <option>Não</option>
+                  </select>
+                </div>
             </div>
+          </div>
             <div>
               <label>Capacidade</label>
-              <input type="text" />
-            </div>
+              <input type="text" name="capacidade" required /> </div>
           </div>
 
           <label>Tamanho do Espaço</label>
           <div class="form-row">
-            <input type="text" placeholder="Largura" />
-            <input type="text" placeholder="Comprimento" />
-          </div>
+            <input type="text" name="largura" placeholder="Largura" required /> <input type="text" name="comprimento" placeholder="Comprimento" required /> </div>
 
           <div class="button-container">
             <button class="botao-acao adicionar" onclick="window.location.href='../questionario_instalacao/form1/adicionar_descricao.php'">
-            <button type="button" class="next-btn"
-            onclick="window.location.href='../form2/adicionar_localizacao.php'"
+            <button type="submit" class="next-btn"
             >Próximo</button>
           </div>
         </form>
