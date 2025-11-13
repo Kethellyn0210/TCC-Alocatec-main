@@ -17,6 +17,39 @@ $usuario = Store::get('usuario');
   <link rel="stylesheet" href="instalacoes.css">
      <link rel="icon" href="img/logo.png">
   <link rel="shortcut icon" href="img/logo.png">
+    <style>
+.msg-sucesso,
+.msg-erro {
+  width: 100%;
+  max-width: 900px;
+  margin: 10px auto;
+  padding: 20px 10px;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.msg-sucesso {
+  background-color: #e6ffee;
+  border-left: 6px solid #00c853;
+  color: #007a33;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.msg-erro {
+  background-color: #ffeaea;
+  border-left: 6px solid #e53935;
+  color: #b71c1c;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.msg-sucesso.fade-out,
+.msg-erro.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+</style>
 </head>
 <body>
 
@@ -63,6 +96,15 @@ $usuario = Store::get('usuario');
   </button>
 </div>
 </div>
+
+<?php
+if (isset($_SESSION['mensagem_apagar'])) {
+    $mensagem = $_SESSION['mensagem_apagar'];
+    $classe = $mensagem['tipo'] === 'sucesso' ? 'msg-sucesso' : 'msg-erro';
+    echo "<div class='$classe'>{$mensagem['texto']}</div>";
+    unset($_SESSION['mensagem_apagar']);
+}
+?>
 
   <div class="nao-sei">
    <div class="status">

@@ -161,7 +161,6 @@ a:hover {
   background-color: #f2f2f2;
 }
 
-/* Botão de atualizar (ícone circular) */
 .botao-acao.atualizar {
   border-radius: 50%;
   width: 48px;
@@ -169,7 +168,6 @@ a:hover {
   padding: 0;
 }
 
-/* Botão de adicionar (ícone + texto) */
 .botao-acao.adicionar {
   background-color: #fff;
   color: #000;

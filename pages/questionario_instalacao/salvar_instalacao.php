@@ -16,7 +16,12 @@ $usuario = $_SESSION['usuario'];
 $inicio          = $_POST['inicio'] ?? null;
 $termino         = $_POST['termino'] ?? null;
 $disponibilidade = $_POST['disponibilidade'] ?? null;
-$status          = $_POST['status'] ?? 'Ativo';
+
+$status = $_POST['status'] ?? 'Ativo';
+
+if (!in_array($status, ['Ativo', 'Inativo'])) {
+    $status = 'Ativo'; 
+}
 
 $requiredSession = [
     'nome_espaco','tipo_espaco','cobertura','capacidade',
@@ -30,7 +35,7 @@ foreach ($requiredSession as $key) {
     }
 }
 
-$id = $usuario['id_administrador'];
+$id = $usuario['id'];
 
 $nome_espaco = $_SESSION['nome_espaco'];
 $tipo_espaco = $_SESSION['tipo_espaco'];
@@ -53,13 +58,13 @@ mysqli_begin_transaction($conexao_servidor_bd);
 
 $sql1 = "
     INSERT INTO estabelecimento (
-        nome, endereco, numero, bairro, cep, cidade, 
-        complemento, uf, inicio, termino, disponibilidade, id_administrador) 
-        VALUES (
-        '$nome_espaco', '$endereco', '$numero', '$bairro',
+        nome, status, endereco, numero, bairro, cep, cidade, 
+        complemento, uf, inicio, termino, disponibilidade, id_administrador
+    ) VALUES (
+        '$nome_espaco', '$status', '$endereco', '$numero', '$bairro',
         '$cep', '$cidade', '$complemento', '$uf', 
-        '$inicio', '$termino', '$disponibilidade', id 
- );
+        '$inicio', '$termino', '$disponibilidade', $id
+    );
 ";
 
 if (mysqli_query($conexao_servidor_bd, $sql1)) {
@@ -67,27 +72,29 @@ if (mysqli_query($conexao_servidor_bd, $sql1)) {
 
     $sql2 = "
         INSERT INTO espaco (
-            tipo, capacidade, cobertura, largura, comprimento, localidade, status, id_estabelecimento
+            tipo, capacidade, cobertura, largura, comprimento, localidade, id_estabelecimento
         ) VALUES (
             '$tipo_espaco', '$capacidade', '$cobertura', '$largura', '$comprimento', 
-            '$endereco', '$status', '$id_estabelecimento'
+            '$endereco', $id_estabelecimento
         );
     ";
 
     if (mysqli_query($conexao_servidor_bd, $sql2)) {
         mysqli_commit($conexao_servidor_bd);
         $mensagem = "Instalação salva com sucesso!";
+        $tipo_mensagem = "Sucesso";
         foreach ($requiredSession as $key) {
             unset($_SESSION[$key]);
         }
     } else {
         mysqli_rollback($conexao_servidor_bd);
         $mensagem = "Erro ao salvar espaço: " . mysqli_error($conexao_servidor_bd);
+        $tipo_mensagem = "Erro";
     }
-
 } else {
     mysqli_rollback($conexao_servidor_bd);
     $mensagem = "Erro ao salvar estabelecimento: " . mysqli_error($conexao_servidor_bd);
+    $tipo_mensagem = "Erro";
 }
 
 mysqli_close($conexao_servidor_bd);
@@ -101,6 +108,33 @@ mysqli_close($conexao_servidor_bd);
   <title>ALOCATEC - Salvar Instalação</title>
   <link rel="stylesheet" href="salvar_instalacao.css">
   <link rel="icon" href="./img/logo.png">
+  <link rel="shortcut icon" href="img/logo.png">
+  <style>
+.resuldado-Sucesso, .resuldado-Erro {
+  width: 100%;
+  max-width: 900px;
+  margin: 10px auto;
+  padding: 20px 10px;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.resuldado-Sucesso {
+  background-color: #e6ffee;
+  border-left: 6px solid #00c853;
+  color: #007a33;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.resuldado-Erro {
+  background-color: #ffeaea;
+  border-left: 6px solid #e53935;
+  color: #b71c1c;
+  font-size: 1rem;
+  font-weight: 600;
+}
+  </style>
 </head>
 
 <body>
@@ -148,9 +182,9 @@ mysqli_close($conexao_servidor_bd);
 </div>
 </div>
 
-      <div class="resultado">
-        <h2><?php echo htmlspecialchars($mensagem); ?></h2>
-      </div>
+<div class="resuldado<?= $tipo_mensagem === 'Sucesso' ? '-Sucesso' : '-Erro' ?>">
+  <?php echo htmlspecialchars($mensagem); ?>
+</div>
 
       <form class="form">
         <div class="form-group full">

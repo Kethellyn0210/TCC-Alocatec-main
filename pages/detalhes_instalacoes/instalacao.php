@@ -1,5 +1,5 @@
 <?php
-require_once '../../database/conexao_bd_mysql.php'; // conexão com o banco
+require_once '../../database/conexao_bd_mysql.php';
 require_once '../../login/login.php';
 
 if (!Store::isLogged()) {
@@ -36,7 +36,7 @@ $sql_espaco = "
     localidade, E.id_estabelecimento
     FROM espaco E
     INNER JOIN estabelecimento T ON E.id_estabelecimento = T.id_estabelecimento
-    WHERE T.id_estabelecimento = 1;
+    WHERE T.id_estabelecimento = $id_estabelecimento;
 ";
 
 $result_espaco = mysqli_query($conexao_servidor_bd, $sql_espaco);
@@ -47,12 +47,14 @@ if (!$result_espaco || mysqli_num_rows($result_espaco) == 0) {
 
 $dados_espaco = mysqli_fetch_assoc($result_espaco);
 
+
 $tipo_espaco     = $dados_espaco['tipo'];
 $cobertura       = $dados_espaco['cobertura'];
 $capacidade      = $dados_espaco['capacidade'];
 $largura         = $dados_espaco['largura'];
 $comprimento     = $dados_espaco['comprimento'];
 
+$status = $dados_estab['status'];
 $nome_espaco      = $dados_estab['nome'];
 $endereco        = $dados_estab['endereco'];
 $numero          = $dados_estab['numero'];
@@ -74,6 +76,39 @@ $disponibilidade = $dados_estab['disponibilidade'];
   <link rel="stylesheet" href="instalacao.css">
   <link rel="icon" href="img/logo.png">
   <link rel="shortcut icon" href="img/logo.png">
+  <style>
+.msg-sucesso,
+.msg-erro {
+  width: 100%;
+  max-width: 900px;
+  margin: 10px auto;
+  padding: 20px 10px;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.msg-sucesso {
+  background-color: #e6ffee;
+  border-left: 6px solid #00c853;
+  color: #007a33;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.msg-erro {
+  background-color: #ffeaea;
+  border-left: 6px solid #e53935;
+  color: #b71c1c;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.msg-sucesso.fade-out,
+.msg-erro.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+</style>
 </head>
 <body>
 
@@ -104,9 +139,24 @@ $disponibilidade = $dados_estab['disponibilidade'];
   </aside>
 
   <main class="content">
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+$id_estabelecimento = $_GET['id_estabelecimento'] ?? null;
+if (isset($_SESSION['mensagem'])) {
+    $mensagem = $_SESSION['mensagem'];
+    $classe = $mensagem['tipo'] === 'sucesso' ? 'msg-sucesso' : 'msg-erro';
+    echo "<div class='$classe'>{$mensagem['texto']}</div>";
+    unset($_SESSION['mensagem']); 
+}
+?>
+
     <div class="header-form">
       <h2><?php echo htmlspecialchars($nome_espaco); ?></h2>
-      <span class="status-ativo">Ativo</span>
+      <span class="status <?= htmlspecialchars($status) ?>">
+  <?= htmlspecialchars($status) ?>
+</span>
     </div>
 
     <form class="form">
@@ -192,8 +242,12 @@ $disponibilidade = $dados_estab['disponibilidade'];
     </form>
 
     <div class="form-actions">
-      <button type="button" class="btn btn-apagar">Apagar</button>
-      <button type="button" class="btn btn-editar">Editar</button>
+      <button class="btn btn-apagar" onclick="window.location.href='../apagar_instalacao/apagar.php?id_estabelecimento=<?php echo $id_estabelecimento; ?>'">
+        Apagar
+    </button>
+
+      <button type="button" class="btn btn-editar" onclick="window.location.href='../editar_instalacao/editar.php?id_estabelecimento=<?php echo $id_estabelecimento; ?>'">
+        Editar</button>
       <button type="button" class="btn btn-voltar">Voltar</button>
     </div>
   </main>
