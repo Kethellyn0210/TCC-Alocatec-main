@@ -216,7 +216,7 @@ a:hover {
 }
 
 .filters {
-  margin-top: 30px;
+  margin-top: 15px;
   display: flex;
   justify-content: space-between;
   gap: 16px;
@@ -230,7 +230,7 @@ a:hover {
   gap: 10px;
   background: #fff;
   border-radius: 10px;
-  height: 50px;
+  height: 45px;
   width: 354px;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
 }
@@ -254,7 +254,7 @@ a:hover {
   gap: 15px;
   background: #fff;
   border-radius: 10px;
-  height: 50px;
+  height: 45px;
   width: 250px;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
 }
@@ -331,7 +331,7 @@ a:hover {
 }
 
 .solicitacao-card {
-  margin-top: 30px;
+  margin-top: 20px;
   padding: 5px;
   border-radius: 8px;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
@@ -450,7 +450,7 @@ img {
 
 .pagination-dots {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .pagination-dots .dot {
