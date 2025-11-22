@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'email' => $dados['email']
       ]);
 
-      header("Location: ./pages/home/home.php");
+      header("Location: ./pages/solicitacao/solicitacao.php");
       exit();
     } else {
       echo "<script>alert('Usuário ou senha incorretos!');</script>";

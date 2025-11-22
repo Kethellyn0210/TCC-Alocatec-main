@@ -51,10 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <nav>
       <ul>
-        <li><a href="">INICIO</a></li>
-        <li><a href="../solicitacao/solicitacao.php">SOLICITAÇÕES</a></li>
-        <li><a href="./fotos.php">INSTALAÇÕES</a></li>
-        <li>NOTIFICAÇÕES</li>
+        <li><a href="../../solicitacao/solicitacao.php">SOLICITAÇÕES</a></li>
+        <li><a href="../../instalacoes/instalacoes.php">INSTALAÇÕES</a></li>
       </ul>
     </nav>
     <div class="user">

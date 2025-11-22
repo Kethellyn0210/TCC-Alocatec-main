@@ -31,10 +31,8 @@ $usuario = Store::get('usuario');
 
       <nav>
         <ul>
-          <li>INÍCIO</li>
           <li><a href="../solicitacao/solicitacao.php">SOLICITAÇÕES</a></li>
           <li><a href="../instalacoes/instalacoes.php">INSTALAÇÕES</a></li>
-          <li>NOTIFICAÇÕES</li>
         </ul>
       </nav>
 
@@ -110,6 +108,19 @@ $usuario = Store::get('usuario');
 
     <?php 
     require_once '../../database/conexao_bd_mysql.php'; 
+
+$limite = 3;
+
+$onde_estou = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+
+$linha_mysql = ($onde_estou - 1) * $limite;
+
+$total_query = "SELECT COUNT(*) AS total FROM reserva";
+$total_result = mysqli_query($conexao_servidor_bd, $total_query);
+$total_row = mysqli_fetch_assoc($total_result);
+$total = $total_row['total'];
+$total_pag = ceil($total / $limite);
+
       $sql = "
         SELECT 
             R.id_reserva,
@@ -161,6 +172,14 @@ $usuario = Store::get('usuario');
       </div>";
       }
     ?>
+
+    <div class="pagination-dots">
+    <?php for ($i = 1; $i <= $total_pag; $i++): ?>
+        <?php $class = ($i == $onde_estou) ? 'active' : ''; ?>
+        <a href="?page=<?php echo $i; ?>" class="dot <?php echo $class; ?>"></a>
+    <?php endfor; ?>
+</div>
+
   </div>
 </body>
 </html>
