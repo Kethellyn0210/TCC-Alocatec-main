@@ -13,7 +13,7 @@ $usuario = Store::get('usuario');
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ALOCATEC - Solicitações</title>
+  <title>ALOCATEC - Solicitações 1</title>
   <link rel="stylesheet" href="solicitacao.css">
   <link rel="icon" href="img/logo.png">
   <link rel="shortcut icon" href="img/logo.png">
