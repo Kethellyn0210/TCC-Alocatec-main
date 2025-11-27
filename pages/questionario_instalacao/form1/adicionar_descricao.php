@@ -53,36 +53,49 @@ $usuario = Store::get('usuario');
         <h2>Descrição do Espaço</h2>
 
         <form method="post" action="../form2/adicionar_localizacao.php">
-          <label>Nome da Espaço</label>
-          <input type="text" name="nome_espaco" required /> <div class="form-row">
-            <div>
-              <label>Tipo de Espaço/Esporte</label>
-              <input type="text" name="tipo_espaco" required /> </div>
-          <div class="form-row">
-            <div>
-              <label>Cobertura</label>
-                <div>
-                  <select name="cobertura">
-                    <option>Sim</option>
-                    <option>Não</option>
-                  </select>
-                </div>
-            </div>
-          </div>
-            <div>
-              <label>Capacidade</label>
-              <input type="text" name="capacidade" required /> </div>
-          </div>
+ <label>Nome do Espaço</label>
+  <input type="text" name="nome_espaco" required />
 
-          <label>Tamanho do Espaço</label>
-          <div class="form-row">
-            <input type="text" name="largura" placeholder="Largura" required /> <input type="text" name="comprimento" placeholder="Comprimento" required /> </div>
+  <div class="form-row">
+    <div>
+      <label>Tipo de Espaço/Esporte</label>
+      <select name="tipo_espaco" required>
+        <option>Vôlei</option>
+        <option>Futebol</option>
+        <option>Basquete</option>
+        <option>Piscina</option>
+        <option>Poliesportivo</option>
+        <option>Outros</option>
+      </select>
+    </div>
 
-          <div class="button-container">
-            <button class="botao-acao adicionar" onclick="window.location.href='../questionario_instalacao/form1/adicionar_descricao.php'">
-            <button type="submit" class="next-btn"
+    <div>
+      <label>Cobertura</label>
+      <select name="cobertura" required>
+        <option>Sim</option>
+        <option>Não</option>
+      </select>
+    </div>
+
+    <div>
+      <label>Capacidade</label>
+      <input type="number" name="capacidade" required />
+    </div>
+  </div>
+
+  <label>Tamanho do Espaço</label>
+  <div class="form-row">
+    <input type="text" name="largura" placeholder="Largura" required />
+    <input type="text" name="comprimento" placeholder="Comprimento" required />
+  </div>
+
+  <label>Descrição Adicional</label>
+  <input type="text" name="descricao_adicional" required/>
+
+  <div class="button-container">
+        <button type="submit" class="next-btn"
             >Próximo</button>
-          </div>
+  </div>
         </form>
       </section>
     </main>

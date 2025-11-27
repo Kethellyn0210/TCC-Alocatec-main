@@ -16,14 +16,13 @@ if (!isset($_GET['id_estabelecimento'])) {
 $id_estabelecimento = intval($_GET['id_estabelecimento']); 
 
 $sql_estabelecimento = "
-    SELECT nome, endereco, numero, bairro, cep, cidade, 
+    SELECT nome_est, tipo, endereco, numero, bairro, cep, cidade, 
            complemento, uf, inicio, termino, disponibilidade, status
     FROM estabelecimento
     WHERE id_estabelecimento = $id_estabelecimento;
 ";
 
 $result_estab = mysqli_query($conexao_servidor_bd, $sql_estabelecimento);
-
 if (!$result_estab || mysqli_num_rows($result_estab) == 0) {
   die("Estabelecimento não encontrado.");
 }
@@ -32,7 +31,7 @@ $dados_estab = mysqli_fetch_assoc($result_estab);
 
 
 $sql_espaco = "
-      SELECT tipo, capacidade, cobertura, largura, comprimento, 
+      SELECT capacidade, cobertura, largura, comprimento, 
     localidade, E.id_estabelecimento
     FROM espaco E
     INNER JOIN estabelecimento T ON E.id_estabelecimento = T.id_estabelecimento
@@ -47,15 +46,14 @@ if (!$result_espaco || mysqli_num_rows($result_espaco) == 0) {
 
 $dados_espaco = mysqli_fetch_assoc($result_espaco);
 
-
-$tipo_espaco     = $dados_espaco['tipo'];
 $cobertura       = $dados_espaco['cobertura'];
 $capacidade      = $dados_espaco['capacidade'];
 $largura         = $dados_espaco['largura'];
 $comprimento     = $dados_espaco['comprimento'];
 
 $status = $dados_estab['status'];
-$nome_espaco      = $dados_estab['nome'];
+$tipo_espaco     = $dados_estab['tipo'];
+$nome_espaco      = $dados_estab['nome_est'];
 $endereco        = $dados_estab['endereco'];
 $numero          = $dados_estab['numero'];
 $bairro          = $dados_estab['bairro'];

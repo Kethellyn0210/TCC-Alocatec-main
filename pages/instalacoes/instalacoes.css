@@ -225,14 +225,13 @@ a:hover {
 }
 
 .search {
+  width: 250px;
+  background: #0d2137;
+  color: white;
   display: flex;
-  align-items: center;
-  gap: 10px;
-  background: #fff;
-  border-radius: 10px;
-  height: 45px;
-  width: 354px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px 20px;
 }
 
 .search img {

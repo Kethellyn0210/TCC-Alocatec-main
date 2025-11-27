@@ -175,7 +175,7 @@ $total = $total_row['total'];
 $total_pag = ceil($total / $limite);
 
 $sql = "
-SELECT id_estabelecimento, nome, endereco, status, inicio, termino, disponibilidade
+SELECT id_estabelecimento, nome_est, endereco, status, inicio, termino, disponibilidade
 FROM estabelecimento
 LIMIT $linha_mysql, $limite
 ";
@@ -188,7 +188,7 @@ if ($reservas && mysqli_num_rows($reservas) > 0) {
         <div class='solicitacao-card' data-id='$id' onclick=\"window.location.href='../detalhes_instalacoes/instalacao.php?id_estabelecimento=$id'\">
           <div class='topo-solicitacao'>
             <div class='nome-espaco'>
-              <h2>" . htmlspecialchars($value['nome']) . "</h2>
+              <h2>" . htmlspecialchars($value['nome_est']) . "</h2>
             </div>
             <div class='status-solicitacao " . htmlspecialchars($value['status']) . "'>
               <h2>" . htmlspecialchars($value['status']) . "</h2>

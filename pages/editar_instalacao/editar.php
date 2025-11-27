@@ -24,9 +24,9 @@ if (!isset($_GET['id_estabelecimento'])) {
 $id = intval($_GET['id_estabelecimento']);
 
 $sql = "
-SELECT e.id_estabelecimento, e.nome AS nome, e.endereco, e.numero, e.bairro, e.cep, 
+SELECT e.id_estabelecimento, e.nome_est AS nome_est, e.endereco, e.numero, e.bairro, e.cep, 
        e.cidade, e.complemento, e.uf, e.inicio, e.termino, e.disponibilidade, e.status,
-       s.id_espaco, s.tipo, s.capacidade, s.cobertura, s.largura, s.comprimento, 
+       s.id_espaco, e.tipo, s.capacidade, s.cobertura, s.largura, s.comprimento, 
        s.localidade 
 FROM estabelecimento e
 JOIN espaco s ON e.id_estabelecimento = s.id_estabelecimento
@@ -90,7 +90,7 @@ if (!$dados) {
   <div class="form-row">
     <div class="form-group">
     <label>Nome do Espaço:</label>
-    <input type="text" name="nome" value="<?php echo htmlspecialchars($dados['nome']); ?>"><br>
+    <input type="text" name="nome" value="<?php echo htmlspecialchars($dados['nome_est']); ?>"><br>
 
         <label>Status:</label>
     <select name="status">

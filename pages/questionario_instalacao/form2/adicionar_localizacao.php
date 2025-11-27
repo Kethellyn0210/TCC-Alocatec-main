@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['capacidade']  = isset($_POST['capacidade']) ? intval($_POST['capacidade']) : 0;
     $_SESSION['largura']     = isset($_POST['largura']) ? trim($_POST['largura']) : '';
     $_SESSION['comprimento'] = isset($_POST['comprimento']) ? trim($_POST['comprimento']) : '';
+    $_SESSION['descricao_adicional'] = isset($_POST['descricao_adicional']) ? trim($_POST['descricao_adicional']) : '';
 } else {
     // sem POST, redireciona para o passo 1
     header("Location: form1_adicionar_descricao.php");

@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       Store::set('usuario', [
         'id' => $dados['id_administrador'],
-        'nome' => $dados['nome'],
+        'nome' => $dados['nome_adm'],
         'email' => $dados['email']
       ]);
 

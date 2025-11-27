@@ -122,20 +122,24 @@ $total = $total_row['total'];
 $total_pag = ceil($total / $limite);
 
       $sql = "
-        SELECT 
-            R.id_reserva,
-            R.data,
-            R.horario,
-            R.status,
-            U.nome AS usuario,
-            E.tipo AS espaco
-        FROM reserva R
-        INNER JOIN usuario U ON R.id_usuario = U.id_usuario
-        INNER JOIN espaco E ON R.id_espaco = E.id_espaco
-        LIMIT 3
-      ";
+SELECT 
+    R.id_reserva,
+    R.data,
+    R.horario_inicio,
+    R.horario_fim,
+    R.status,
+    U.nome_usu AS nome_usu,          
+    ES.nome_est AS nome_est,         
+    ES.tipo AS tipo_estabelecimento  -- opcional, se quiser mostrar tipo
+FROM reserva R
+INNER JOIN usuario U ON R.id_usuario = U.id_usuario
+INNER JOIN estabelecimento ES ON R.id_estabelecimento = ES.id_estabelecimento
+ORDER BY R.data DESC
+LIMIT $linha_mysql, $limite ;
+";
 
       $reservas = mysqli_query($conexao_servidor_bd, $sql);
+
 
       if ($reservas && mysqli_num_rows($reservas) > 0) {
           while ($reserva = mysqli_fetch_assoc($reservas)) {
@@ -143,7 +147,7 @@ $total_pag = ceil($total / $limite);
               <div class='solicitacao-card'>
                 <div class='topo-solicitacao'>
                   <div class='nome-espaco'>
-                    <h2>" . htmlspecialchars($reserva['espaco']) . "</h2>
+                    <h2>" . htmlspecialchars($reserva['nome_est']) . "</h2>
                   </div>
                   <div class='status-solicitacao " . htmlspecialchars($reserva['status']) . "'>
                     <h2>" . htmlspecialchars($reserva['status']) . "</h2>
@@ -156,11 +160,11 @@ $total_pag = ceil($total / $limite);
                   </div>
                   <div class='detalhe'>
                     <h3>Horário:</h3>
-                    <p>" . htmlspecialchars($reserva['horario']) . "</p>
+                    <p>" . htmlspecialchars($reserva['horario_inicio']) . " - " . htmlspecialchars($reserva['horario_fim']) . " </p>
                   </div>
                   <div class='detalhe'>
                     <h3>Usuário:</h3>
-                    <p>" . htmlspecialchars($reserva['usuario']) . "</p>
+                    <p>" . htmlspecialchars($reserva['nome_usu']) . "</p>
                   </div>
                 </div>
               </div>

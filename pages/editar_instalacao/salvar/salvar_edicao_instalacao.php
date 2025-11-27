@@ -7,27 +7,36 @@ require_once '../../../database/conexao_bd_mysql.php';
 
 $id_estabelecimento = intval($_POST['id_estabelecimento']);
 $id_espaco          = intval($_POST['id_espaco']);
-$nome               = $_POST['nome'];
-$tipo               = $_POST['tipo'];
+$nome               = mysqli_real_escape_string($conexao_servidor_bd, $_POST['nome']);
+$tipo               = mysqli_real_escape_string($conexao_servidor_bd, $_POST['tipo']);
 $capacidade         = intval($_POST['capacidade']);
-$cobertura          = $_POST['cobertura'];
-$status             = $_POST['status'];
-$inicio             = $_POST['inicio'];
-$termino            = $_POST['termino'];
-$disponibilidade    = $_POST['disponibilidade'];
+$cobertura          = mysqli_real_escape_string($conexao_servidor_bd, $_POST['cobertura']);
+$status             = mysqli_real_escape_string($conexao_servidor_bd, $_POST['status']);
+$inicio             = mysqli_real_escape_string($conexao_servidor_bd, $_POST['inicio']);
+$termino            = mysqli_real_escape_string($conexao_servidor_bd, $_POST['termino']);
+$disponibilidade    = mysqli_real_escape_string($conexao_servidor_bd, $_POST['disponibilidade']);
 
+// Atualiza estabelecimento
 $sql1 = "
 UPDATE estabelecimento 
-SET nome='$nome', inicio='$inicio', termino='$termino', disponibilidade='$disponibilidade', status='$status'
+SET nome_est='$nome',
+    tipo='$tipo',
+    inicio='$inicio',
+    termino='$termino',
+    disponibilidade='$disponibilidade',
+    status='$status'
 WHERE id_estabelecimento = $id_estabelecimento;
 ";
 
+// Atualiza espaço (corrigido: removida vírgula inicial)
 $sql2 = "
 UPDATE espaco
-SET tipo='$tipo', capacidade='$capacidade', cobertura='$cobertura'
+SET capacidade = $capacidade,
+    cobertura = '$cobertura'
 WHERE id_espaco = $id_espaco;
 ";
 
+// Executa os dois updates
 if (mysqli_query($conexao_servidor_bd, $sql1) && mysqli_query($conexao_servidor_bd, $sql2)) {
     $_SESSION['mensagem'] = [
         'tipo' => 'sucesso',

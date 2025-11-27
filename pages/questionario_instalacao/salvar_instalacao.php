@@ -43,6 +43,7 @@ $cobertura   = $_SESSION['cobertura'];
 $capacidade  = intval($_SESSION['capacidade']);
 $largura     = $_SESSION['largura'];
 $comprimento = $_SESSION['comprimento'];
+$descricao_adicional = $_SESSION['descricao_adicional'];
 $endereco    = $_SESSION['endereco'];
 $numero      = $_SESSION['numero'];
 $bairro      = $_SESSION['bairro'];
@@ -58,10 +59,10 @@ mysqli_begin_transaction($conexao_servidor_bd);
 
 $sql1 = "
     INSERT INTO estabelecimento (
-        nome, status, endereco, numero, bairro, cep, cidade, 
+        nome_est, tipo, status, endereco, numero, bairro, cep, cidade, 
         complemento, uf, inicio, termino, disponibilidade, id_administrador
     ) VALUES (
-        '$nome_espaco', '$status', '$endereco', '$numero', '$bairro',
+        '$nome_espaco', '$tipo_espaco', '$status', '$endereco', '$numero', '$bairro',
         '$cep', '$cidade', '$complemento', '$uf', 
         '$inicio', '$termino', '$disponibilidade', $id
     );
@@ -72,10 +73,10 @@ if (mysqli_query($conexao_servidor_bd, $sql1)) {
 
     $sql2 = "
         INSERT INTO espaco (
-            tipo, capacidade, cobertura, largura, comprimento, localidade, id_estabelecimento
+          capacidade, cobertura, largura, comprimento, descricao_adicional, localidade, id_estabelecimento
         ) VALUES (
-            '$tipo_espaco', '$capacidade', '$cobertura', '$largura', '$comprimento', 
-            '$endereco', $id_estabelecimento
+            '$capacidade', '$cobertura', '$largura', '$comprimento', 
+            '$descricao_adicional', '$endereco', $id_estabelecimento
         );
     ";
 
