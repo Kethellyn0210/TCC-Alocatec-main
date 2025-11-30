@@ -243,8 +243,8 @@ a:hover {
   gap: 10px;
   background: #fff;
   border-radius: 10px;
-  height: 50px;
-  width: 354px;
+  height: 45px;
+  width: 600px;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
 }
 
@@ -286,6 +286,22 @@ a:hover {
   font-size: 20px;
   width: 90%;
   margin-left: 10px;
+}
+
+.btn-buscar {
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+.btn-buscar:hover {
+  background: #3b7bc1;
 }
 
 .solicitacao {
