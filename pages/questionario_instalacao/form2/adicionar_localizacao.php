@@ -30,10 +30,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ALOCATEC - Adicionar Instalações</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="adicionar_localizacao.css" />
-    <link rel="icon" href="../img/logo.png" />    
-    <link rel="shortcut icon" href="../img/logo.png" />
-    
+  <link rel="icon" href="../img/logo.png" />    
+  <link rel="shortcut icon" href="../img/logo.png" />
 </head>
 <body>
   <div class="container">
@@ -99,10 +101,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <input type="text" name="uf" maxlength="2" required> </div>
           </div>
 
-    <div class="button-container">
-        <button class="botao-acao adicionar" onclick="window.location.href='../questionario_instalacao/form1/adicionar_descricao.php'">
-        <button type="submit" class="next-btn"
-            >Próximo</button>
+          <div class="button-container">
+            <button type="submit" class="next-btn"
+                >Próximo</button>
           </div>
         </form>
       </div>

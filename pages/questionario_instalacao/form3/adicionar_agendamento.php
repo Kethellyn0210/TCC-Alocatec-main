@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['complemento']  = isset($_POST['complemento']) ? trim($_POST['complemento']) : '';
     $_SESSION['uf']           = isset($_POST['uf']) ? strtoupper(trim($_POST['uf'])) : '';
 } else {
-    header("Location: adicionar_localizacao.php");
+    header("Location: form2/adicionar_localizacao.php");
     exit();
 }
 ?>
@@ -27,16 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALOCATEC - Adicionar Instalaçõest</title>
+    <title>ALOCATEC - Adicionar Instalações</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="adicionar_agendamento.css" />
     <link rel="icon" href="../img/logo.png" />
     <link rel="shortcut icon" href="../img/logo.png" />
-      <script>
-    function confirmarSalvar() {
-      return confirm("Tem certeza que deseja salvar esta instalação?");
-    }
-  </script>
-
 </head>
 <body>
     <div class="container">
@@ -71,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div class="form-card">
         <h2>Dados de Agendamento</h2>
 
-        <form method="post" onsubmit="return confirmarSalvar()" action="../salvar_instalacao.php">
+        <form method="post" action="../form4/adicionar_fotos.php">
           <div class="form-row">
             <div>
               <label>Tempo de Uso</label>
@@ -102,12 +99,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   </select>
                 </div>
             </div>
-          </div>
-          <div class="button-container">
-              <button type="submit" class="salvar">Salvar</button>
-            <button type="button" class="cancelar">Cancelar</button>
-          </div>
 
+            <div class="button-container">
+              <button type="submit" class="next-btn">Próximo</button>
+            </div>
+          </div>
         </form>
       </div>
     </main>
